@@ -43,7 +43,8 @@ module.exports = function (grunt) {
             defaults = {
                 size: 16,
                 arrange: {},
-                prefix: ".montage",
+                basePrefix: ".montage",
+                prefix: ".",
                 suffix: "",
                 outputImage: "montage.png",
                 outputStylesheet: "montage.css",
@@ -88,7 +89,7 @@ module.exports = function (grunt) {
                     return true;
                 }),
                 dest = path.join(files.dest, options.outputImage),
-                css = buildRule(options.prefix + options.suffix, options.baseRules),
+                css = buildRule(options.basePrefix + options.suffix, options.baseRules),
                 arrange = calcArrangement(options.arrange, src.length),
                 filesList = src.map(function (img) {
                     return "\"" + img + "\"";
@@ -108,7 +109,7 @@ module.exports = function (grunt) {
                                     .replace(rSpecial, "\\$1")
                                     .replace(/\s+/g, "_");
 
-                return buildRule(options.prefix + "." + className + options.suffix, {
+                return buildRule(options.basePrefix + options.prefix + className + options.suffix, {
                     "background-position": offsetLeft + " " + offsetTop
                 });
             }).join("");

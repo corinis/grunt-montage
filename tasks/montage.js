@@ -47,6 +47,7 @@ module.exports = function (grunt) {
                 prefix: ".",
                 suffix: "",
                 outputImage: "montage.png",
+                outputImageOverriddenName: null,
                 outputStylesheet: "montage.css",
                 baseRules: {},
                 magick: {}
@@ -69,7 +70,10 @@ module.exports = function (grunt) {
         }
 
         // Add necessary style rules to the base CSS
-        options.baseRules.background = "url('" + options.outputImage + "') no-repeat";
+        var outputImageName = options.outputImageOverriddenName
+            ? options.outputImageOverriddenName
+            : options.outputImage;
+        options.baseRules.background = "url('" + outputImageName + "') no-repeat";
         options.baseRules.width = options.size.width + "px";
         options.baseRules.height = options.size.height + "px";
 
